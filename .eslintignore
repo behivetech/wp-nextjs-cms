@@ -1,0 +1,7 @@
+.idea/
+.cache/
+package-lock.json
+yarn.lock
+public/
+.next/
+generated/
