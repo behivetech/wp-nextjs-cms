@@ -1,0 +1,15 @@
+$area-border-color: #900;
+
+.area {
+    display: block;
+
+    &--edit {
+        border: 1px dotted $area-border-color;
+
+        .area {
+            &__name {
+                border: 1px solid $area-border-color;
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "baseUrl": ".", // This must be specified if "paths" is.
+        "baseUrl": "./src", // This must be specified if "paths" is.
         "target": "ES2017",
         "lib": ["es6", "dom", "dom.iterable", "esnext"],
         "allowJs": true,

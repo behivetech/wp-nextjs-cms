@@ -1,44 +1,49 @@
 import classnames from 'classnames';
-import {mapKeys} from 'lodash';
 
-interface getClassNameArgs {
-    /** className usually coming in as a prop from the component to be added to the root element's class */
+interface IGetClassNameProps {
+    /** className prop generally passed in from the parent component */
     className?: string;
     /**
-        modifiers is an object that determines what modifier classes are added to the root element
-        to follow the BEM styling pattern
+        object where the key is any additional classNames used to modify the elements of the compoent.
+        If the value of the key is true, it will add the name of the key to the className
     */
-    modifiers?: {[key: string]: string};
-    /** rootClass is the main className to be used in the component and prefixed on the element classes */
+    modifiers?: {[key: string]: boolean}
+    /** className for the component */
     rootClass: string;
+    styles?: {[key: string]: string}
 }
 
-export default function getClassName({
-    className,
-    modifiers,
-    rootClass,
-}: getClassNameArgs): [string, (string) => string] {
+export default function getClassName({className, modifiers = {}, rootClass, styles = {}}: IGetClassNameProps): [string, (childClassName: string) => string] {
     function getModifiers() {
-        return modifiers
-            ? mapKeys(modifiers, (modVal, modKey) => `${rootClass}--${modKey}`)
-            : {};
+        let updatedModifiers = {};
+
+        if (Object.keys(modifiers).length) {
+            for (const [modKey, modVal] of Object.entries(modifiers)) {
+                const classKey = `${rootClass}--${modKey}`
+                const newClassName = styles[classKey] || classKey;
+
+                updatedModifiers[newClassName] = modVal;
+            }
+        }
+
+        return updatedModifiers;
     }
 
-    /** 
-        getChildClass is used to retrieve the classname for child elements. It auto prefixes the 
-        rootClass to the child classname using BEM code standards.
-    */
-    function getChildClass(childClassName) {
+    function getChildClass(childClassName: string) {
         return `${rootClass}__${childClassName}`;
     }
 
-    const rootClassName = classnames(
-        {
-            ...getModifiers(),
-        },
-        className,
-        rootClass
-    );
+    function getRootStyles() {
+        return classnames(
+            className,
+            {
+                ...getModifiers(),
+            },
+            styles[rootClass] || rootClass,
+        );
+    }
 
-    return [rootClassName, getChildClass];
+
+
+    return [getRootStyles(), getChildClass];
 }
