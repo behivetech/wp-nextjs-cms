@@ -32,11 +32,7 @@ export function useDataClientContext() {
     return React.useContext(DataClientContext);
 }
 
-export default function DataClientProvider({
-    $stateGo,
-    children,
-    signOut,
-}) {
+export default function DataClientProvider({$stateGo, children, signOut}) {
     const dataClient = initAxios({accessToken: getAccessToken()});
 
     function handleSignOut() {
@@ -59,7 +55,7 @@ export default function DataClientProvider({
     */
     dataClient.interceptors.response.use(
         (response) => response,
-        (error): any => {
+        (error) => {
             // Execute auth's signOut when 401 (Not Authorized) is response
             if (Number(error?.response?.status) === 401) {
                 handleSignOut();

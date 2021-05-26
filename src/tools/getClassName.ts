@@ -7,30 +7,36 @@ interface IGetClassNameProps {
         object where the key is any additional classNames used to modify the elements of the compoent.
         If the value of the key is true, it will add the name of the key to the className
     */
-    modifiers?: {[key: string]: boolean}
+    modifiers?: {[key: string]: boolean};
     /** className for the component */
     rootClass: string;
-    styles?: {[key: string]: string}
+    styles?: {[key: string]: string};
 }
 
-export default function getClassName({className, modifiers = {}, rootClass, styles = {}}: IGetClassNameProps): [string, (childClassName: string) => string] {
+export default function getClassName({
+    className,
+    modifiers = {},
+    rootClass,
+    styles = {},
+}: IGetClassNameProps): [string, (childClassName: string) => string] {
     function getModifiers() {
-        let updatedModifiers = {};
-
-        if (Object.keys(modifiers).length) {
-            for (const [modKey, modVal] of Object.entries(modifiers)) {
-                const classKey = `${rootClass}--${modKey}`
+        const updatedModifiers = {};
+        const modifierKeys = Object.keys(modifiers);
+        if (modifierKeys.length) {
+            modifierKeys.forEach((modKey) => {
+                const classKey = `${rootClass}--${modKey}`;
                 const newClassName = styles[classKey] || classKey;
 
-                updatedModifiers[newClassName] = modVal;
-            }
+                updatedModifiers[newClassName] = modifiers[modKey];
+            });
         }
 
         return updatedModifiers;
     }
 
     function getChildClass(childClassName: string) {
-        return `${rootClass}__${childClassName}`;
+        const classKey = `${rootClass}__${childClassName}`;
+        return styles[classKey] || classKey;
     }
 
     function getRootStyles() {
@@ -39,11 +45,9 @@ export default function getClassName({className, modifiers = {}, rootClass, styl
             {
                 ...getModifiers(),
             },
-            styles[rootClass] || rootClass,
+            styles[rootClass] || rootClass
         );
     }
-
-
 
     return [getRootStyles(), getChildClass];
 }

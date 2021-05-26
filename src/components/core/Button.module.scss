@@ -1,0 +1,19 @@
+.button {
+    background-color: #909;
+    border: 1px solid #909;
+    border-radius: 4px;
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:disabled {
+        background-color: #555;
+        border-color: #555;
+        color: #ccc;
+        cursor: not-allowed;
+    }
+}

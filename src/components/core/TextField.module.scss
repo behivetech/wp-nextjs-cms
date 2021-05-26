@@ -1,0 +1,30 @@
+.text-field {
+    &__input {
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 0.125rem;
+        display: block;
+        padding: 0.5rem 0.25rem;
+        margin: 0;
+        width: 100%;
+    }
+
+    &__label {
+        display: block;
+        color: #555;
+        font-size: 0.75rem;
+    }
+
+    &__field-error {
+        color: #900;
+        font-size: 0.75rem;
+    }
+
+    &--on-dark {
+        .text-field {
+            &__label {
+                color: #fff;
+            }
+        }
+    }
+}

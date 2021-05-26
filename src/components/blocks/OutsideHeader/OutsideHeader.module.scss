@@ -1,0 +1,40 @@
+.outside-header {
+    border-bottom: 1px solid #ccc;
+    justify-content: start;
+
+    &__section {
+        display: grid;
+        grid-column-gap: 1rem;
+        grid-template-columns: auto 1fr 5fr;
+        margin: 0 auto;
+        max-width: 75rem;
+        width: 100%;
+    }
+
+    &__logo {
+        background-image: url('//plus.outsideonline.com/wp-content/themes/pom-sites/resources/assets/images/outside-logo.svg');
+        background-position: 53%;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        text-indent: -1000rem;
+        width: 85px;
+    }
+    &__ul {
+        align-self: start stretch;
+        color: #000;
+        display: grid;
+        grid-column-gap: 1rem;
+        grid-template-columns: auto auto auto auto auto auto;
+        list-style-type: none;
+        max-width: 30rem;
+    }
+
+    &__nav-link {
+        color: #000;
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.125rem;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+}

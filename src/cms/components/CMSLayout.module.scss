@@ -1,0 +1,11 @@
+.cms-layout {
+    &__button {
+        bottom: 0;
+        left: 0;
+        font-size: 0.625rem;
+        opacity: 0.5;
+        position: fixed;
+        padding: 0.0125rem 0.125rem;
+        z-index: 300;
+    }
+}

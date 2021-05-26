@@ -1,0 +1,63 @@
+$area-border-color: #f33;
+
+.cms-area {
+    border: 1px dashed $area-border-color;
+    padding: 0.125rem;
+    position: relative;
+    margin-bottom: 1rem;
+
+    &__name {
+        background-color: #822;
+        border-radius: 0 0 0.5rem 0.5rem;
+        border: 1px solid #822;
+        color: #fff;
+        font-size: 0.625rem;
+        margin-top: 0.625px;
+        max-width: 10rem;
+        opacity: 0.8;
+        padding: 0.125rem 0.5rem;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        // transform: translateY(100%);
+    }
+
+    &__block {
+        position: relative;
+    }
+
+    &__button-area,
+    &__button-block {
+        opacity: 0.5;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__button-area {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    &__button-block {
+        background-color: transparent;
+        border-color: none;
+        bottom: 0;
+        font-size: 0.625rem;
+        margin: 0.125rem 0;
+        opacity: 0;
+        padding: 0.0125rem 0.125rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 10;
+
+        &:hover {
+            background-color: #808;
+            opacity: 0.5;
+        }
+
+        &:disabled {
+            opacity: 0;
+        }
+    }
+}

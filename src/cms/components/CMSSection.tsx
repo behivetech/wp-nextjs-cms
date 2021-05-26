@@ -1,14 +1,14 @@
 import React from 'react';
-import dynamic from 'next/dynamic'
 
-import * as blocks from 'components/blocks';
 import getClassName from 'tools/getClassName';
-import styles from './Section.module.scss';
-import {useCmsPageProvider} from 'cms/components/CmsPageProvider';
+import {useCMSPageProvider} from 'cms/components/CMSPageProvider';
 
 import Headline from 'components/core/Headline';
+import CMSBlock from 'cms/components/CMSBlock';
 
-interface ISectionProps {
+import styles from './CMSSection.module.scss';
+
+interface ICMSSectionProps {
     className?: string;
     edit?: boolean;
     headlineLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -21,7 +21,7 @@ interface ISectionProps {
 
 // TODO: Pull the blockData from context
 
-export default function Section({
+const CMSSection: React.FunctionComponent<ICMSSectionProps> = ({
     sectionKey,
     edit = false,
     className,
@@ -30,29 +30,33 @@ export default function Section({
     name,
     title,
     titleVisible,
-}: ISectionProps) {
-    const {getSection} = useCmsPageProvider();
+}: ICMSSectionProps) => {
+    const {getSection} = useCMSPageProvider();
     const [rootClassName, getChildClass] = getClassName({
         className,
         modifiers: {
             edit,
         },
-        rootClass: 'section',
+        rootClass: 'cms-section',
         styles,
     });
     const blockData = getSection(sectionKey).blocks || [];
 
     return (
         <section key={name} className={rootClassName}>
-            <Headline level={headlineLevel} variant={headlineVariant} hidden={titleVisible}>{title}</Headline>
-            {
-                blockData.map(({blockId, blockComponent}) => {
-                    const DynamicBlock = blocks[blockComponent];
-
-                    return <DynamicBlock key={blockId} blockId={blockId} />;
-                })
-            }
+            <Headline
+                level={headlineLevel}
+                variant={headlineVariant}
+                hidden={titleVisible}
+            >
+                {title}
+            </Headline>
+            {blockData.map(({blockId, componentName}) => (
+                <CMSBlock key={blockId} blockId={blockId} componentName={componentName} />
+            ))}
             {edit && <div className={getChildClass('name')}>{name}</div>}
-       </section>
-   )
-}
+        </section>
+    );
+};
+
+export default CMSSection;

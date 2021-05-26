@@ -1,0 +1,28 @@
+.drawer {
+    background-color: #333;
+    color: #fff;
+    height: 100vh;
+    left: 0;
+    min-width: 10rem;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    transform: translateX(-100%);
+    transition: 0.5s;
+    min-width: 20vw;
+    z-index: 100;
+
+    &--open {
+        transform: translateX(0);
+    }
+
+    &__close {
+        position: absolute;
+        font-size: 1.25rem;
+        padding: 0.25rem 0.25rem;
+        background-color: transparent;
+        border: none;
+        top: 0.0125rem;
+        right: 0.25rem;
+    }
+}

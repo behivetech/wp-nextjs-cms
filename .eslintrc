@@ -10,8 +10,20 @@
     "plugin:react/recommended",
     "prettier"
   ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"]
+    }
+  ]
   "plugins": [
-    "@typescript-eslint", 
+    "@typescript-eslint",
     "import",
     "module-resolver",
     "prettier",
@@ -71,7 +83,7 @@
     "react/jsx-boolean-value": 1,
     "react/jsx-closing-bracket-location": 0,
     "react/jsx-curly-spacing": 0,
-    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
+    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx", ".ts", ".tsx"]}],
     "react/jsx-fragments": 0,
     "react/jsx-indent": ["warn", 4],
     "react/jsx-indent-props": 0,

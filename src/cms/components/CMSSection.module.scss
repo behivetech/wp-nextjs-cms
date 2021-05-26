@@ -1,0 +1,15 @@
+$section-border-color: #900;
+
+.cms-section {
+    display: block;
+
+    &--edit {
+        border: 1px dotted $section-border-color;
+
+        .cms-section {
+            &__name {
+                border: 1px solid $section-border-color;
+            }
+        }
+    }
+}
