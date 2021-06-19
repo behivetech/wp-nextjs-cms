@@ -5,7 +5,7 @@ import getClassName from 'tools/getClassName';
 import styles from './DefaultHeader.module.scss';
 
 interface IDefaultHeaderProps {
-    className: string;
+    className?: string;
 }
 
 const DefaultHeader: React.FunctionComponent<IDefaultHeaderProps> = ({

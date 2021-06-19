@@ -1,8 +1,12 @@
 import React from 'react';
 
+export interface IDefaultTextData {
+    text: string;
+}
+
 interface IDefaultTextProps {
     blockId: string | number;
-    data: {[key: string]: any};
+    data: IDefaultTextData;
     // className?: string;
 }
 

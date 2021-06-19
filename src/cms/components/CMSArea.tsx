@@ -3,7 +3,7 @@ import React from 'react';
 import getClassName from 'tools/getClassName';
 import {useCMSPageProvider} from 'cms/components/CMSPageProvider';
 
-import CMSDynamicComponent from './CMSDynamicComponent';
+import CMSDynamicBlock from './CMSDynamicBlock';
 
 import CMSBlocksList from './CMSBlocksList';
 import Button from 'components/core/Button';
@@ -11,18 +11,18 @@ import Headline from 'components/core/Headline';
 import styles from './CMSArea.module.scss';
 
 interface ICMSAreaProps {
+    className?: string;
     name: string;
-    [key: string]: any;
 }
 
 const CMSArea: React.FunctionComponent<ICMSAreaProps> = ({
+    className,
     name,
-    ...restProps
 }: ICMSAreaProps) => {
     const {
         editBlock,
         editPage,
-        pageData,
+        pageData: {areas},
         removeBlock,
         toggleEditBlock,
         toggleEditPage,
@@ -33,14 +33,14 @@ const CMSArea: React.FunctionComponent<ICMSAreaProps> = ({
         rootClass: 'cms-area',
         styles,
     });
-    const blockData = pageData[name] ? pageData[name].blocks : [];
+    const blockData = areas[name] ? areas[name].blocks : [];
     const blocks = blockData.map(({componentName, ...restData}, index) => {
         const dynamicComponent = (
-            <CMSDynamicComponent
+            <CMSDynamicBlock
+                className={className}
                 componentName={componentName}
                 {...restData}
-                {...restProps}
-                key={`${name}-${componentName}__${index}`}
+                key={`${name}__${componentName}--${index}`}
             />
         );
 
@@ -82,7 +82,7 @@ const CMSArea: React.FunctionComponent<ICMSAreaProps> = ({
                         Update / Add / Remove Block
                     </Headline>
                     <Button onClick={() => removeBlock(name, index)}>Remove Block</Button>
-                    <CMSDynamicComponent
+                    <CMSDynamicBlock
                         {...restData}
                         componentName={`${componentName}Edit`}
                         areaName={name}

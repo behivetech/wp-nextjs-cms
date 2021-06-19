@@ -1,11 +1,11 @@
 import React from 'react';
 import DataCacheProvider from './DataCacheProvider';
-import CMSPageProvider from 'cms/components/CMSPageProvider';
+import CMSPageProvider, {IPageData} from 'cms/components/CMSPageProvider';
 import DataClientProvider from './DataClientProvider';
 
 interface IAppProvidersProps {
     children: React.ReactNode;
-    pageProps: {[key: string]: any};
+    pageProps: {pageData: IPageData};
 }
 
 const AppProviders = ({children, pageProps}: IAppProvidersProps) => (

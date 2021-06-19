@@ -1,16 +1,13 @@
 import React from 'react';
 
 import AppProviders from 'components/providers/AppProviders';
+import {IPageData} from 'cms/components/CMSPageProvider';
 
 import 'styles/index.scss';
 
-export interface IPageProps {
-    [key: string]: any;
-}
-
 interface IAppProps {
-    Component: React.ComponentType<IPageProps>;
-    pageProps: IPageProps;
+    Component: React.ComponentType<IPageData>;
+    pageProps: {pageData: IPageData};
 }
 
 const App: React.FunctionComponent<IAppProps> = ({Component, pageProps}: IAppProps) => (

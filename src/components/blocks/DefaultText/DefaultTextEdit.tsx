@@ -2,12 +2,11 @@ import React from 'react';
 
 import getClassName from 'tools/getClassName';
 
-import DefaultTextForm from './DefaultTextForm';
+import DefaultTextForm, {IDefaultTextFormProps} from './DefaultTextForm';
 
-interface IDefaultTextEditProps {
+type IDefaultTextEditProps = {
     className?: string;
-    [key: string]: any;
-}
+} & IDefaultTextFormProps;
 
 const DefaultTextEdit: React.FunctionComponent<IDefaultTextEditProps> = ({
     className,

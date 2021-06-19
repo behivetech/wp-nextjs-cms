@@ -1,28 +1,44 @@
 import React, {createContext, useContext, useReducer, useState} from 'react';
 
-interface ICMSPageProviderProps {
-    children: React.ReactNode;
-    pageData: any;
+type IBlockData = {[key: string]: any};
+
+interface IBlock {
+    componentName: string;
+    data?: IBlockData;
 }
 
-type IBlockDetails = {[key: string]: any};
+interface ILayout {
+    componentName: string;
+}
+
+interface IBlocks {
+    blocks: IBlock[];
+}
+
+export interface IPageData {
+    areas: {
+        [key: string]: IBlocks;
+    };
+    pageLayout: ILayout;
+    mainLayout: ILayout;
+}
+
+interface ICMSPageProviderProps {
+    children: React.ReactNode;
+    pageData: IPageData;
+}
 
 interface IContext {
-    addBlock: (areaName: string, blockName: string, data: {[key: string]: any}) => void;
+    addBlock: (areaName: string, blockName: string, data: IBlockData) => void;
     editBlock: boolean;
-    layoutDrawerDetails: any;
+    layoutDrawerDetails: React.ReactNode;
     editPage: boolean;
-    getSection: (sectionKeyArg: string) => any;
-    pageData: any;
+    pageData: IPageData;
     removeBlock: (areaName: string, index: number) => void;
     setLayoutDrawerDetails: (details: React.ReactNode) => void;
     toggleEditPage: () => void;
     toggleEditBlock: (openOverride?: boolean) => void;
-    updateBlockData: (
-        areaName: string,
-        index: number,
-        data: {[key: string]: any}
-    ) => void;
+    updateBlockData: (areaName: string, index: number, data: IBlockData) => void;
 }
 
 const DEFAULT_CONTEXT: IContext = {
@@ -30,12 +46,10 @@ const DEFAULT_CONTEXT: IContext = {
     editBlock: false,
     layoutDrawerDetails: null,
     editPage: false,
-    getSection: (sectionKeyArg) => ({}),
     pageData: {
-        template: {
-            name: null,
-        },
-        sections: [],
+        areas: {},
+        mainLayout: {componentName: 'DefaultMainLayout'},
+        pageLayout: {componentName: 'DefaultPageLayout'},
     },
     removeBlock: (areaName, index) => null,
     setLayoutDrawerDetails: (details) => null,
@@ -131,18 +145,11 @@ const CMSPageProvider: React.FunctionComponent<ICMSPageProviderProps> = ({
         setEditBlock(false);
     }
 
-    function getSection(sectionKeyArg) {
-        const sections = pageData.sections || [];
-
-        return sections.find(({sectionKey}) => sectionKey === sectionKeyArg);
-    }
-
     const context = {
         addBlock,
         editBlock,
         layoutDrawerDetails,
         editPage,
-        getSection,
         pageData: pageState,
         removeBlock,
         setLayoutDrawerDetails,

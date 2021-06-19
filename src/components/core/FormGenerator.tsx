@@ -57,31 +57,12 @@ const FormGenerator: React.FunctionComponent<IFormGeneratorProps> = ({
                     <TextField
                         {...textFieldProps}
                         key={name}
+                        defaultValue={defaultValue}
                         fieldError={errors[name]}
                         name={name}
-                        inputProps={{defaultValue}}
                         ref={register({required: true})}
                     />
                 );
-                {
-                    /*                return (
-                    <Controller
-                        key={name}
-                        name={name}
-                        control={control}
-                        rules={rules}
-                        render={({field}) => (
-                            <TextField
-                                {...field}
-                                {...textFieldProps}
-                                name={name}
-                                inputProps={{defaultValue}}
-                            />
-                        )}
-                    />
-                );
-*/
-                }
             })}
             <Button type="submit">Submit</Button>
         </form>

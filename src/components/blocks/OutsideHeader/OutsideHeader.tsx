@@ -6,14 +6,18 @@ import Headline from 'components/core/Headline';
 
 import styles from './OutsideHeader.module.scss';
 
-type ILinks = {
+export interface IOutsideHeaderLinkData {
     href: string;
     linkChild: string;
+}
+
+export type IOutsideHeaderData = {
+    links: IOutsideHeaderLinkData[];
 };
 
 interface IOutsideHeaderProps {
     className?: string;
-    data?: {links: ILinks[]};
+    data?: IOutsideHeaderData;
 }
 
 const OutsideHeader: React.FunctionComponent<IOutsideHeaderProps> = ({
@@ -34,7 +38,7 @@ const OutsideHeader: React.FunctionComponent<IOutsideHeaderProps> = ({
                 </Headline>
                 <ul className={getChildClass('ul')}>
                     {data.links.map(({href, linkChild}) => (
-                        <li className={getChildClass('li')}>
+                        <li key={href} className={getChildClass('li')}>
                             <a
                                 className={getChildClass('nav-link')}
                                 href={href}

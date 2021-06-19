@@ -3,31 +3,34 @@ import React from 'react';
 import getClassName from 'tools/getClassName';
 
 import CMSArea from 'cms/components/CMSArea';
+import CMSMainLayout from 'cms/components/CMSMainLayout';
 
-import styles from './DefaultLayout.module.scss';
+import styles from './DefaultPageLayout.module.scss';
 
-interface IDefaultLayoutProps {
+interface IDefaultPageLayoutProps {
     children: React.ReactNode;
-    className: string;
+    className?: string;
 }
 
-const DefaultLayout: React.FunctionComponent<IDefaultLayoutProps> = ({
+const DefaultPageLayout: React.FunctionComponent<IDefaultPageLayoutProps> = ({
     children,
     className,
-}: IDefaultLayoutProps) => {
+}: IDefaultPageLayoutProps) => {
     const [rootClassName, getChildClass] = getClassName({
         className,
-        rootClass: 'default-layout',
+        rootClass: 'default-page-layout',
         styles,
     });
 
     return (
         <div className={rootClassName}>
             <CMSArea name="header" className={getChildClass('header')} />
-            <main className={getChildClass('main')}>{children}</main>
+            <main className={getChildClass('main')}>
+                <CMSMainLayout />
+            </main>
             <CMSArea name="footer" className={getChildClass('footer')} />
         </div>
     );
 };
 
-export default DefaultLayout;
+export default DefaultPageLayout;

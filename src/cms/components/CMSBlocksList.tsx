@@ -4,7 +4,7 @@ import getClassName from 'tools/getClassName';
 import {useCMSPageProvider} from 'cms/components/CMSPageProvider';
 
 import * as blocks from 'components/blocks';
-import CMSDynamicComponent from './CMSDynamicComponent';
+import CMSDynamicBlock from './CMSDynamicBlock';
 import Button from 'components/core/Button';
 import Headline from 'components/core/Headline';
 
@@ -65,7 +65,7 @@ const CMSBlocksList: React.FunctionComponent<ICMSBlocksListProps> = ({
                 ))}
             </select>
             {hasFormComponent() && (
-                <CMSDynamicComponent
+                <CMSDynamicBlock
                     componentName={`${currentComponentName}Add`}
                     onSubmit={handleSubmit}
                 />

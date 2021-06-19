@@ -2,18 +2,19 @@ import React from 'react';
 
 import * as blocks from 'components/blocks';
 
-interface ICMSDynamicComponentProps {
+interface ICMSDynamicBlockProps {
     componentName: string;
     [key: string]: any;
 }
-
-const CMSDynamicComponent: React.FunctionComponent<ICMSDynamicComponentProps> = ({
+const CMSDynamicBlock: React.FunctionComponent<ICMSDynamicBlockProps> = ({
     componentName,
     ...restProps
-}: ICMSDynamicComponentProps) => {
+}: ICMSDynamicBlockProps) => {
+    // eslint-disable-next-line
     const DynamicBlock = blocks[componentName];
 
+    DynamicBlock.displayName = componentName;
     return DynamicBlock ? <DynamicBlock {...restProps} /> : null;
 };
 
-export default CMSDynamicComponent;
+export default CMSDynamicBlock;

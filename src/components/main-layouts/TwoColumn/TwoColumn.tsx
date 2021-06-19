@@ -3,7 +3,6 @@ import React from 'react';
 import getClassName from 'tools/getClassName';
 
 import CMSArea from 'cms/components/CMSArea';
-import CMSLayout from 'cms/components/CMSLayout';
 import styles from './TwoColumn.module.scss';
 
 interface TwoColumnProps {
@@ -19,15 +18,13 @@ export default function TwoColumn({className}) {
 
     // return <div>working two column</div>;
     return (
-        <CMSLayout>
-            <div className={getChildClass('columns')}>
-                <div>
-                    <CMSArea name="mainLeft" />
-                </div>
-                <div>
-                    <CMSArea name="mainRight" />
-                </div>
+        <div className={rootClassName}>
+            <div>
+                <CMSArea name="mainLeft" />
             </div>
-        </CMSLayout>
+            <div>
+                <CMSArea name="mainRight" />
+            </div>
+        </div>
     );
 }

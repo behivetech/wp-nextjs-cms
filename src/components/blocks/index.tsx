@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 
 export const DefaultHeader = dynamic(() => import('components/blocks/DefaultHeader'));
 export const DefaultFooter = dynamic(() => import('components/blocks/DefaultFooter'));
-export const DefaultLayout = dynamic(() => import('components/blocks/DefaultLayout'));
 export const DefaultText = dynamic(() => import('components/blocks/DefaultText'));
 export const DefaultTextAdd = dynamic(() =>
     import('components/blocks/DefaultText').then(({Add}) => Add)

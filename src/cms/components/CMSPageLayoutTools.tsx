@@ -7,27 +7,30 @@ import * as blocks from 'components/blocks';
 import Button from 'components/core/Button';
 import Drawer from 'components/core/Drawer';
 
-import styles from './CMSLayout.module.scss';
+import styles from './CMSPageLayoutTools.module.scss';
 
-const CMSLayout: React.FunctionComponent<any> = (props) => {
+interface ICMSPageLayoutToolsProps {
+    children: React.ReactNode;
+}
+
+const CMSPageLayoutTools: React.FunctionComponent<ICMSPageLayoutToolsProps> = ({
+    children,
+}: ICMSPageLayoutToolsProps) => {
     const {
         editBlock,
         layoutDrawerDetails,
-        pageData,
         toggleEditBlock,
         toggleEditPage,
     } = useCMSPageProvider();
-    const {componentName, ...layoutData} = pageData?.layout;
     const [rootClassName, getChildClass] = getClassName({
-        rootClass: 'cms-layout',
+        rootClass: 'cms-page-layout-tools',
         styles,
     });
 
     // eslint-disable-next-line
-    const DynamicBlock = blocks[componentName];
     return (
         <>
-            <DynamicBlock {...props} {...layoutData} />
+            {children}
             <Button className={getChildClass('button')} onClick={toggleEditPage}>
                 E
             </Button>
@@ -38,4 +41,4 @@ const CMSLayout: React.FunctionComponent<any> = (props) => {
     );
 };
 
-export default CMSLayout;
+export default CMSPageLayoutTools;

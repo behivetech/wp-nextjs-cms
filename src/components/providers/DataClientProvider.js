@@ -1,8 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
 
-/**  See /docs/DataComponents/DataClientContext.md for more info */
-
 const DEFAULT_CONTEXT = {
     dataClient: axios,
     getCancelToken: (cancel) => undefined,
@@ -32,7 +30,7 @@ export function useDataClientContext() {
     return React.useContext(DataClientContext);
 }
 
-export default function DataClientProvider({$stateGo, children, signOut}) {
+export default function DataClientProvider({children}) {
     const dataClient = initAxios({accessToken: getAccessToken()});
 
     function handleSignOut() {
@@ -41,7 +39,7 @@ export default function DataClientProvider({$stateGo, children, signOut}) {
     }
 
     // This is a function to get a cancelToken from axios to cancel requests
-    function getCancelToken(callbackCancel = () => null) {
+    function getCancelToken(callbackCancel = (cancel) => null) {
         const CancelToken = axios.CancelToken;
 
         return new CancelToken(function executor(cancel) {

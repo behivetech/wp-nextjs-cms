@@ -5,7 +5,12 @@ import getClassName from 'tools/getClassName';
 import DefaultTextForm from './DefaultTextForm';
 
 interface IDefaultTextAddProps {
+    areaName: string;
     className?: string;
+    data: {[key: string]: any};
+    index: number;
+    onSubmit: (data: {[key: string]: any}) => void;
+    [key: string]: any;
 }
 
 const DefaultTextAdd: React.FunctionComponent<IDefaultTextAddProps> = ({

@@ -5,7 +5,7 @@ import getClassName from 'tools/getClassName';
 import styles from './DefaultFooter.module.scss';
 
 interface IDefaultFooterProps {
-    className: string;
+    className?: string;
 }
 
 const DefaultFooter: React.FunctionComponent<IDefaultFooterProps> = ({

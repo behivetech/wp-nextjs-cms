@@ -23,7 +23,7 @@ const TextField = React.forwardRef(
         {
             className,
             defaultValue = '',
-            fieldError = '',
+            fieldError = {},
             inputProps,
             label = '',
             name,

@@ -5,7 +5,7 @@ import {useCMSPageProvider} from 'cms/components/CMSPageProvider';
 
 import FormGenerator, {IFieldParams} from 'components/core/FormGenerator';
 
-interface IDefaultTextFormProps {
+export interface IDefaultTextFormProps {
     areaName: string;
     className?: string;
     data?: {[key: string]: any};
@@ -20,7 +20,6 @@ const DefaultTextForm: React.FunctionComponent<IDefaultTextFormProps> = ({
     index,
     onSubmit,
 }: IDefaultTextFormProps) => {
-    debugger;
     const {updateBlockData} = useCMSPageProvider();
     const [rootClassName] = getClassName({
         className,
